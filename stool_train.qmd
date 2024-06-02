@@ -1,0 +1,29 @@
+---
+title: "Stool Training Data"
+format: html
+editor: visual
+---
+
+```{r setup}
+library(tidyverse)
+library(REDCapTidieR)
+RAK <- Sys.getenv("STOOL_TRAIN_RAK")
+redcap_uri <- "https://redcaptraining.umms.med.umich.edu/api/"
+```
+
+### Pull some (fake) Training data
+
+```{r}
+data <- read_redcap(redcap_uri, RAK)
+head(data)
+```
+
+## Bind Tibbles to the environment
+
+```{r}
+data |> 
+  bind_tibbles()
+
+head(demographics) |> 
+  select(f_name, l_name, gender, marital, disease_type)
+```
